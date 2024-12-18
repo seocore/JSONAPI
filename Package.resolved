@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "Poly",
-        "repositoryURL": "https://github.com/mattpolzin/Poly.git",
+        "repositoryURL": "https://github.com/seocore/Poly.git",
         "state": {
-          "branch": null,
-          "revision": "99e2e8b575620369be52fe348c0dd72028e3674c",
-          "version": "2.8.0"
+          "branch": "main",
+          "revision": "ae70b64446adb19597c8ece324b743c14869a42e",
+          "version": null
         }
       }
     ]
