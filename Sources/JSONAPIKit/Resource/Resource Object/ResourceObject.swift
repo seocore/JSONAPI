@@ -63,7 +63,7 @@ public protocol ResourceObjectProxyDescription: JSONTyped {
 /// itself is encoded and decoded as an
 /// `ResourceObject`, which gets specialized on an
 /// `ResourceObjectDescription`.
-public protocol ResourceObjectDescription: ResourceObjectProxyDescription where Attributes: JSONAPI.Attributes, Relationships: JSONAPI.Relationships {}
+public protocol ResourceObjectDescription: ResourceObjectProxyDescription where Attributes: JSONAPIKit.Attributes, Relationships: JSONAPIKit.Relationships {}
 
 /// ResourceObjectProxy is a protocol that can be used to create
 /// types that _act_ like ResourceObject but cannot be encoded
@@ -71,9 +71,9 @@ public protocol ResourceObjectDescription: ResourceObjectProxyDescription where 
 @dynamicMemberLookup
 public protocol ResourceObjectProxy: Equatable, JSONTyped {
     associatedtype Description: ResourceObjectProxyDescription
-    associatedtype EntityRawIdType: JSONAPI.MaybeRawId
+    associatedtype EntityRawIdType: JSONAPIKit.MaybeRawId
 
-    typealias Id = JSONAPI.Id<EntityRawIdType, Self>
+    typealias Id = JSONAPIKit.Id<EntityRawIdType, Self>
 
     typealias Attributes = Description.Attributes
     typealias Relationships = Description.Relationships
@@ -103,8 +103,8 @@ public protocol AbstractResourceObject {}
 /// protocol lets other types accept any ResourceObject as a generic
 /// specialization.
 public protocol ResourceObjectType: AbstractResourceObject, ResourceObjectProxy, CodablePrimaryResource where Description: ResourceObjectDescription {
-    associatedtype Meta: JSONAPI.Meta
-    associatedtype Links: JSONAPI.Links
+    associatedtype Meta: JSONAPIKit.Meta
+    associatedtype Links: JSONAPIKit.Links
 
     /// Any additional metadata packaged with the entity.
     var meta: Meta { get }
@@ -113,13 +113,13 @@ public protocol ResourceObjectType: AbstractResourceObject, ResourceObjectProxy,
     var links: Links { get }
 }
 
-public protocol IdentifiableResourceObjectType: ResourceObjectType, Relatable where EntityRawIdType: JSONAPI.RawIdType {}
+public protocol IdentifiableResourceObjectType: ResourceObjectType, Relatable where EntityRawIdType: JSONAPIKit.RawIdType {}
 
 /// An `ResourceObject` is a single model type that can be
 /// encoded to or decoded from a JSON API
 /// "Resource Object."
-/// See https://jsonapi.org/format/#document-resource-objects
-public struct ResourceObject<Description: JSONAPI.ResourceObjectDescription, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links, EntityRawIdType: JSONAPI.MaybeRawId>: ResourceObjectType {
+/// See https://JSONAPIKit.org/format/#document-resource-objects
+public struct ResourceObject<Description: JSONAPIKit.ResourceObjectDescription, MetaType: JSONAPIKit.Meta, LinksType: JSONAPIKit.Links, EntityRawIdType: JSONAPIKit.MaybeRawId>: ResourceObjectType {
 
     public typealias Meta = MetaType
     public typealias Links = LinksType
@@ -128,7 +128,7 @@ public struct ResourceObject<Description: JSONAPI.ResourceObjectDescription, Met
     /// the entity is being created clientside and the
     /// server is being asked to create a unique Id. Otherwise,
     /// this should be of a type conforming to `IdType`.
-    public let id: JSONAPI.Id<EntityRawIdType, Self>
+    public let id: JSONAPIKit.Id<EntityRawIdType, Self>
 
     /// The JSON API compliant attributes of this `ResourceObject`.
     public let attributes: Description.Attributes
@@ -163,12 +163,12 @@ extension ResourceObject: Hashable where EntityRawIdType: RawIdType {
     }
 }
 
-extension ResourceObject: JSONAPIIdentifiable, IdentifiableResourceObjectType, Relatable where EntityRawIdType: JSONAPI.RawIdType {
+extension ResourceObject: JSONAPIIdentifiable, IdentifiableResourceObjectType, Relatable where EntityRawIdType: JSONAPIKit.RawIdType {
     public typealias ID = ResourceObject.Id
 }
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
-extension ResourceObject: Swift.Identifiable where EntityRawIdType: JSONAPI.RawIdType {}
+extension ResourceObject: Swift.Identifiable where EntityRawIdType: JSONAPIKit.RawIdType {}
 
 extension ResourceObject: CustomStringConvertible {
     public var description: String {
@@ -198,7 +198,7 @@ extension ResourceObject where EntityRawIdType == Unidentified {
 }
 
 // MARK: - Pointer for Relationships use
-public extension ResourceObject where EntityRawIdType: JSONAPI.RawIdType {
+public extension ResourceObject where EntityRawIdType: JSONAPIKit.RawIdType {
 
     /// A `ResourceObject.Pointer` is a `ToOneRelationship` with no metadata or links.
     /// This is just a convenient way to reference a `ResourceObject` so that
@@ -218,7 +218,7 @@ public extension ResourceObject where EntityRawIdType: JSONAPI.RawIdType {
 
     /// Get a pointer (i.e. `ToOneRelationship`) to this resource
     /// object with the given metadata and links attached.
-    func pointer<MType: JSONAPI.Meta, LType: JSONAPI.Links>(withMeta meta: MType, links: LType) -> ToOneRelationship<ResourceObject, NoIdMetadata, MType, LType> {
+    func pointer<MType: JSONAPIKit.Meta, LType: JSONAPIKit.Links>(withMeta meta: MType, links: LType) -> ToOneRelationship<ResourceObject, NoIdMetadata, MType, LType> {
         return ToOneRelationship(resourceObject: self, meta: meta, links: links)
     }
 }
@@ -232,7 +232,7 @@ public extension ResourceObject where EntityRawIdType == Unidentified {
     }
 
     /// Create a new `ResourceObject` from this one with the given Id.
-    func identified<RawIdType: JSONAPI.RawIdType>(by id: RawIdType) -> ResourceObject<Description, MetaType, LinksType, RawIdType> {
+    func identified<RawIdType: JSONAPIKit.RawIdType>(by id: RawIdType) -> ResourceObject<Description, MetaType, LinksType, RawIdType> {
         return .init(id: ResourceObject<Description, MetaType, LinksType, RawIdType>.ID(rawValue: id), attributes: attributes, relationships: relationships, meta: meta, links: links)
     }
 }
@@ -297,14 +297,14 @@ public extension ResourceObjectProxy {
     /// Access to an Id of a `ToOneRelationship`.
     /// This allows you to write `resourceObject ~> \.other` instead
     /// of `resourceObject.relationships.other.id`.
-    static func ~><OtherEntity: JSONAPIIdentifiable, IdMType: JSONAPI.Meta, MType: JSONAPI.Meta, LType: JSONAPI.Links>(entity: Self, path: KeyPath<Description.Relationships, ToOneRelationship<OtherEntity, IdMType, MType, LType>>) -> OtherEntity.ID {
+    static func ~><OtherEntity: JSONAPIIdentifiable, IdMType: JSONAPIKit.Meta, MType: JSONAPIKit.Meta, LType: JSONAPIKit.Links>(entity: Self, path: KeyPath<Description.Relationships, ToOneRelationship<OtherEntity, IdMType, MType, LType>>) -> OtherEntity.ID {
         return entity.relationships[keyPath: path].id
     }
 
     /// Access to an Id of an optional `ToOneRelationship`.
     /// This allows you to write `resourceObject ~> \.other` instead
     /// of `resourceObject.relationships.other?.id`.
-    static func ~><OtherEntity: OptionalRelatable, IdMType: JSONAPI.Meta, MType: JSONAPI.Meta, LType: JSONAPI.Links>(entity: Self, path: KeyPath<Description.Relationships, ToOneRelationship<OtherEntity, IdMType, MType, LType>?>) -> OtherEntity.ID {
+    static func ~><OtherEntity: OptionalRelatable, IdMType: JSONAPIKit.Meta, MType: JSONAPIKit.Meta, LType: JSONAPIKit.Links>(entity: Self, path: KeyPath<Description.Relationships, ToOneRelationship<OtherEntity, IdMType, MType, LType>?>) -> OtherEntity.ID {
         // Implementation Note: This signature applies to `ToOneRelationship<E?, _, _>?`
         // whereas the one below applies to `ToOneRelationship<E, _, _>?`
         return entity.relationships[keyPath: path]?.id
@@ -313,7 +313,7 @@ public extension ResourceObjectProxy {
     /// Access to an Id of an optional `ToOneRelationship`.
     /// This allows you to write `resourceObject ~> \.other` instead
     /// of `resourceObject.relationships.other?.id`.
-    static func ~><OtherEntity: Relatable, IdMType: JSONAPI.Meta, MType: JSONAPI.Meta, LType: JSONAPI.Links>(entity: Self, path: KeyPath<Description.Relationships, ToOneRelationship<OtherEntity, IdMType, MType, LType>?>) -> OtherEntity.ID? {
+    static func ~><OtherEntity: Relatable, IdMType: JSONAPIKit.Meta, MType: JSONAPIKit.Meta, LType: JSONAPIKit.Links>(entity: Self, path: KeyPath<Description.Relationships, ToOneRelationship<OtherEntity, IdMType, MType, LType>?>) -> OtherEntity.ID? {
         // Implementation Note: This signature applies to `ToOneRelationship<E, _, _>?`
         // whereas the one above applies to `ToOneRelationship<E?, _, _>?`
         return entity.relationships[keyPath: path]?.id
@@ -322,14 +322,14 @@ public extension ResourceObjectProxy {
     /// Access to all Ids of a `ToManyRelationship`.
     /// This allows you to write `resourceObject ~> \.others` instead
     /// of `resourceObject.relationships.others.ids`.
-    static func ~><OtherEntity: Relatable, IdMType: JSONAPI.Meta, MType: JSONAPI.Meta, LType: JSONAPI.Links>(entity: Self, path: KeyPath<Description.Relationships, ToManyRelationship<OtherEntity, IdMType, MType, LType>>) -> [OtherEntity.ID] {
+    static func ~><OtherEntity: Relatable, IdMType: JSONAPIKit.Meta, MType: JSONAPIKit.Meta, LType: JSONAPIKit.Links>(entity: Self, path: KeyPath<Description.Relationships, ToManyRelationship<OtherEntity, IdMType, MType, LType>>) -> [OtherEntity.ID] {
         return entity.relationships[keyPath: path].ids
     }
 
     /// Access to all Ids of an optional `ToManyRelationship`.
     /// This allows you to write `resourceObject ~> \.others` instead
     /// of `resourceObject.relationships.others?.ids`.
-    static func ~><OtherEntity: Relatable, IdMType: JSONAPI.Meta, MType: JSONAPI.Meta, LType: JSONAPI.Links>(entity: Self, path: KeyPath<Description.Relationships, ToManyRelationship<OtherEntity, IdMType, MType, LType>?>) -> [OtherEntity.ID]? {
+    static func ~><OtherEntity: Relatable, IdMType: JSONAPIKit.Meta, MType: JSONAPIKit.Meta, LType: JSONAPIKit.Links>(entity: Self, path: KeyPath<Description.Relationships, ToManyRelationship<OtherEntity, IdMType, MType, LType>?>) -> [OtherEntity.ID]? {
         return entity.relationships[keyPath: path]?.ids
     }
 }

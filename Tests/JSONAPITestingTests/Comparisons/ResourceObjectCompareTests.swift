@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 
 final class ResourceObjectCompareTests: XCTestCase {
     func test_same() {
@@ -136,16 +136,16 @@ final class ResourceObjectCompareTests: XCTestCase {
     )
 }
 
-private enum TestDescription: JSONAPI.ResourceObjectDescription {
+private enum TestDescription: JSONAPIKit.ResourceObjectDescription {
     static let jsonType: String = "test_type"
 
-    struct Attributes: JSONAPI.Attributes {
+    struct Attributes: JSONAPIKit.Attributes {
         let name: Attribute<String>
         let age: Attribute<Int>
         let favoriteColor: Attribute<String?>
     }
 
-    struct Relationships: JSONAPI.Relationships {
+    struct Relationships: JSONAPIKit.Relationships {
         let bestFriend: ToOneRelationship<TestType?, NoIdMetadata, NoMetadata, NoLinks>
         let parents: ToManyRelationship<TestType, NoIdMetadata, NoMetadata, NoLinks>
     }
@@ -153,7 +153,7 @@ private enum TestDescription: JSONAPI.ResourceObjectDescription {
 
 private typealias TestType = ResourceObject<TestDescription, NoMetadata, NoLinks, String>
 
-private struct TestMetadata: JSONAPI.Meta, CustomStringConvertible {
+private struct TestMetadata: JSONAPIKit.Meta, CustomStringConvertible {
     let total: Int
 
     var description: String {
@@ -161,7 +161,7 @@ private struct TestMetadata: JSONAPI.Meta, CustomStringConvertible {
     }
 }
 
-private struct TestLinks: JSONAPI.Links, CustomStringConvertible {
+private struct TestLinks: JSONAPIKit.Links, CustomStringConvertible {
     let link: Link<String, NoMetadata>
 
     var description: String {
@@ -169,7 +169,7 @@ private struct TestLinks: JSONAPI.Links, CustomStringConvertible {
     }
 }
 
-private enum TestDescription2: JSONAPI.ResourceObjectDescription {
+private enum TestDescription2: JSONAPIKit.ResourceObjectDescription {
     static let jsonType: String = "test_type2"
 
     typealias Attributes = NoAttributes

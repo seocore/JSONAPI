@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JSONAPI
+import JSONAPIKit
 
 final class IncludesDecodingErrorTests: XCTestCase {
     func test_unexpectedIncludeType() {
@@ -78,7 +78,7 @@ extension IncludesDecodingErrorTests {
 
         public static var jsonType: String { return "test_entity1" }
 
-        public struct Attributes: JSONAPI.SparsableAttributes {
+        public struct Attributes: JSONAPIKit.SparsableAttributes {
             let foo: Attribute<String>
             let bar: Attribute<Int>
 
@@ -95,11 +95,11 @@ extension IncludesDecodingErrorTests {
 
         public static var jsonType: String { return "test_entity2" }
 
-        public struct Relationships: JSONAPI.Relationships {
+        public struct Relationships: JSONAPIKit.Relationships {
             let entity1: ToOneRelationship<TestEntity, NoIdMetadata, NoMetadata, NoLinks>
         }
 
-        public struct Attributes: JSONAPI.SparsableAttributes {
+        public struct Attributes: JSONAPIKit.SparsableAttributes {
             let foo: Attribute<String>
             let bar: Attribute<Int>
 
@@ -129,7 +129,7 @@ extension IncludesDecodingErrorTests {
 
         public static var jsonType: String { return "test_entity6" }
 
-        struct Relationships: JSONAPI.Relationships {
+        struct Relationships: JSONAPIKit.Relationships {
             let entity4: ToOneRelationship<TestEntity4, NoIdMetadata, NoMetadata, NoLinks>
         }
     }

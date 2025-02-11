@@ -1,6 +1,6 @@
 
 import XCTest
-@testable import JSONAPI
+@testable import JSONAPIKit
 
 class IncludedTests: XCTestCase {
 
@@ -497,7 +497,7 @@ extension IncludedTests {
 
         public static var jsonType: String { return "test_entity1" }
 
-        public struct Attributes: JSONAPI.SparsableAttributes {
+        public struct Attributes: JSONAPIKit.SparsableAttributes {
             let foo: Attribute<String>
             let bar: Attribute<Int>
 
@@ -514,11 +514,11 @@ extension IncludedTests {
 
         public static var jsonType: String { return "test_entity2" }
 
-        public struct Relationships: JSONAPI.Relationships {
+        public struct Relationships: JSONAPIKit.Relationships {
             let entity1: ToOneRelationship<TestEntity, NoIdMetadata, NoMetadata, NoLinks>
         }
 
-        public struct Attributes: JSONAPI.SparsableAttributes {
+        public struct Attributes: JSONAPIKit.SparsableAttributes {
             let foo: Attribute<String>
             let bar: Attribute<Int>
 
@@ -537,7 +537,7 @@ extension IncludedTests {
 		
 		public static var jsonType: String { return "test_entity3" }
 		
-		public struct Relationships: JSONAPI.Relationships {
+		public struct Relationships: JSONAPIKit.Relationships {
 			let entity1: ToOneRelationship<TestEntity, NoIdMetadata, NoMetadata, NoLinks>
 			let entity2: ToManyRelationship<TestEntity2, NoIdMetadata, NoMetadata, NoLinks>
 		}
@@ -573,7 +573,7 @@ extension IncludedTests {
 
 		public static var jsonType: String { return "test_entity6" }
 
-		struct Relationships: JSONAPI.Relationships {
+		struct Relationships: JSONAPIKit.Relationships {
 			let entity4: ToOneRelationship<TestEntity4, NoIdMetadata, NoMetadata, NoLinks>
 		}
 	}

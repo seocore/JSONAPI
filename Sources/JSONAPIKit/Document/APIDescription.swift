@@ -11,7 +11,7 @@ public protocol APIDescriptionType: Codable, Equatable {
 }
 
 /// This is what the JSON API Spec calls the "JSON:API Object"
-public struct APIDescription<Meta: JSONAPI.Meta>: APIDescriptionType {
+public struct APIDescription<Meta: JSONAPIKit.Meta>: APIDescriptionType {
     public let version: String
     public let meta: Meta
 

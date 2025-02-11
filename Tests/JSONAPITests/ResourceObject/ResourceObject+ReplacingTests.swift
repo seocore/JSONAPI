@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JSONAPI
+import JSONAPIKit
 
 final class ResourceObjectReplacingTests: XCTestCase {
     func test_replaceMutableAttributes() {
@@ -126,30 +126,30 @@ final class ResourceObjectReplacingTests: XCTestCase {
     }
 }
 
-private enum MutableTestDescription: JSONAPI.ResourceObjectDescription {
+private enum MutableTestDescription: JSONAPIKit.ResourceObjectDescription {
     static let jsonType: String = "test"
 
-    struct Attributes: JSONAPI.Attributes {
+    struct Attributes: JSONAPIKit.Attributes {
         var name: Attribute<String>
     }
 
-    struct Relationships: JSONAPI.Relationships {
+    struct Relationships: JSONAPIKit.Relationships {
         var other: ToOneRelationship<MutableTestType, NoIdMetadata, NoMetadata, NoLinks>
     }
 }
 
-private typealias MutableTestType = JSONAPI.ResourceObject<MutableTestDescription, NoMetadata, NoLinks, String>
+private typealias MutableTestType = JSONAPIKit.ResourceObject<MutableTestDescription, NoMetadata, NoLinks, String>
 
-private enum ImmutableTestDescription: JSONAPI.ResourceObjectDescription {
+private enum ImmutableTestDescription: JSONAPIKit.ResourceObjectDescription {
     static let jsonType: String = "test2"
 
-    struct Attributes: JSONAPI.Attributes {
+    struct Attributes: JSONAPIKit.Attributes {
         let name: Attribute<String>
     }
 
-    struct Relationships: JSONAPI.Relationships {
+    struct Relationships: JSONAPIKit.Relationships {
         let other: ToOneRelationship<ImmutableTestType, NoIdMetadata, NoMetadata, NoLinks>
     }
 }
 
-private typealias ImmutableTestType = JSONAPI.ResourceObject<ImmutableTestDescription, NoMetadata, NoLinks, String>
+private typealias ImmutableTestType = JSONAPIKit.ResourceObject<ImmutableTestDescription, NoMetadata, NoLinks, String>

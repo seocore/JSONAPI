@@ -9,14 +9,14 @@
 /// a `ResourceObject` would normally encode. Currently, you can
 /// only apply sparse fieldset's to `ResourceObject.Attributes`.
 public struct SparseFieldset<
-    Description: JSONAPI.ResourceObjectDescription,
-    MetaType: JSONAPI.Meta,
-    LinksType: JSONAPI.Links,
-    EntityRawIdType: JSONAPI.MaybeRawId
+    Description: JSONAPIKit.ResourceObjectDescription,
+    MetaType: JSONAPIKit.Meta,
+    LinksType: JSONAPIKit.Links,
+    EntityRawIdType: JSONAPIKit.MaybeRawId
 >: EncodablePrimaryResource where Description.Attributes: SparsableAttributes {
 
     /// The `ResourceObject` type this `SparseFieldset` is capable of modifying.
-    public typealias Resource = JSONAPI.ResourceObject<Description, MetaType, LinksType, EntityRawIdType>
+    public typealias Resource = JSONAPIKit.ResourceObject<Description, MetaType, LinksType, EntityRawIdType>
 
     public let resourceObject: Resource
     public let fields: [Description.Attributes.CodingKeys]

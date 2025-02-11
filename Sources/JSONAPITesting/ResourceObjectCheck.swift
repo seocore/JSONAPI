@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 11/27/18.
 //
 
-import JSONAPI
+import JSONAPIKit
 
 public enum ResourceObjectCheckError: Swift.Error {
     /// The attributes should live in a struct, not

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JSONAPI
+import JSONAPIKit
 
 class NonJSONAPIRelatableTests: XCTestCase {
 	func test_initialization1() {
@@ -57,20 +57,20 @@ extension NonJSONAPIRelatableTests {
 
 		typealias Attributes = NoAttributes
 
-		struct Relationships: JSONAPI.Relationships {
+		struct Relationships: JSONAPIKit.Relationships {
 			let one: ToOneRelationship<NonJSONAPIEntity, NoIdMetadata, NoMetadata, NoLinks>
 			let many: ToManyRelationship<NonJSONAPIEntity, NoIdMetadata, NoMetadata, NoLinks>
 		}
 	}
 
-	typealias TestEntity = JSONAPI.ResourceObject<TestEntityDescription, NoMetadata, NoLinks, String>
+	typealias TestEntity = JSONAPIKit.ResourceObject<TestEntityDescription, NoMetadata, NoLinks, String>
 
 	enum TestEntity2Description: ResourceObjectDescription {
 		static var jsonType: String { return "test" }
 
 		typealias Attributes = NoAttributes
 
-		struct Relationships: JSONAPI.Relationships {
+		struct Relationships: JSONAPIKit.Relationships {
 			let nullableOne: ToOneRelationship<NonJSONAPIEntity?, NoIdMetadata, NoMetadata, NoLinks>
 			let nullableMaybeOne: ToOneRelationship<NonJSONAPIEntity?, NoIdMetadata, NoMetadata, NoLinks>?
 			let maybeOne: ToOneRelationship<NonJSONAPIEntity, NoIdMetadata, NoMetadata, NoLinks>?
@@ -78,7 +78,7 @@ extension NonJSONAPIRelatableTests {
 		}
 	}
 
-	typealias TestEntity2 = JSONAPI.ResourceObject<TestEntity2Description, NoMetadata, NoLinks, String>
+	typealias TestEntity2 = JSONAPIKit.ResourceObject<TestEntity2Description, NoMetadata, NoLinks, String>
 
 	struct NonJSONAPIEntity: Relatable, JSONTyped {
 		static var jsonType: String { return "other" }

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import JSONAPI
+@testable import JSONAPIKit
 
 // MARK: - Relationships
 final class ResourceObjectDecodingErrorTests: XCTestCase {
@@ -547,7 +547,7 @@ extension ResourceObjectDecodingErrorTests {
 
         typealias Attributes = NoAttributes
 
-        public struct Relationships: JSONAPI.Relationships {
+        public struct Relationships: JSONAPIKit.Relationships {
 
             let required: ToOneRelationship<TestEntity, NoIdMetadata, NoMetadata, NoLinks>
             let omittable: ToManyRelationship<TestEntity, NoIdMetadata, NoMetadata, NoLinks>?
@@ -559,7 +559,7 @@ extension ResourceObjectDecodingErrorTests {
     enum TestEntityType2: ResourceObjectDescription {
         public static var jsonType: String { return "fourteenth_test_entities" }
 
-        public struct Attributes: JSONAPI.Attributes {
+        public struct Attributes: JSONAPIKit.Attributes {
 
             let required: Attribute<String>
             let other: Attribute<Int>?

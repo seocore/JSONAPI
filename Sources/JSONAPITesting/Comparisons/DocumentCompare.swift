@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 11/4/19.
 //
 
-import JSONAPI
+import JSONAPIKit
 
 public struct DocumentComparison: Equatable, PropertyComparison {
     public let apiDescription: BasicComparison
@@ -35,7 +35,7 @@ public enum BodyComparison: Equatable, CustomStringConvertible {
 
     public typealias ErrorComparison = [String: BasicComparison]
 
-    static func compare<E: JSONAPIError, M: JSONAPI.Meta, L: JSONAPI.Links>(errors errors1: [E], _ meta1: M?, _ links1: L?, with errors2: [E], _ meta2: M?, _ links2: L?) -> ErrorComparison {
+    static func compare<E: JSONAPIError, M: JSONAPIKit.Meta, L: JSONAPIKit.Links>(errors errors1: [E], _ meta1: M?, _ links1: L?, with errors2: [E], _ meta2: M?, _ links2: L?) -> ErrorComparison {
         let errorComparisons = errors1.compare(
             to: errors2,
             using: { error1, error2 in

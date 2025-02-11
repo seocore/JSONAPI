@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JSONAPI
+import JSONAPIKit
 
 class APIDescriptionTests: XCTestCase {
 
@@ -72,7 +72,7 @@ class APIDescriptionTests: XCTestCase {
 
 // MARK: - Test types
 extension APIDescriptionTests {
-	struct TestMetadata: JSONAPI.Meta {
+	struct TestMetadata: JSONAPIKit.Meta {
 		let hello: String
 		let number: Int
 	}

@@ -7,8 +7,8 @@
 
 import Foundation
 import XCTest
-@testable import JSONAPI
-import JSONAPITesting
+@testable import JSONAPIKit
+import JSONAPIKitTesting
 
 private struct TransformedWrapper<Value: Equatable & Codable, Transform: Transformer>: Codable where Value == Transform.From {
 	let x: TransformedAttribute<Value, Transform>

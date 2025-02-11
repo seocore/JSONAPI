@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 11/27/18.
 //
 
-import JSONAPI
+import JSONAPIKit
 
 extension Id: ExpressibleByUnicodeScalarLiteral where RawType: ExpressibleByUnicodeScalarLiteral {
     public typealias UnicodeScalarLiteralType = RawType.UnicodeScalarLiteralType

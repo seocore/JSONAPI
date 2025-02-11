@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JSONAPI
+import JSONAPIKit
 
 final class SuccessAndErrorDocumentTests: XCTestCase {
     func test_errorAccessors() {
@@ -122,11 +122,11 @@ extension SuccessAndErrorDocumentTests {
         typealias Relationships = NoRelationships
     }
 
-    struct TestMeta: JSONAPI.Meta {
+    struct TestMeta: JSONAPIKit.Meta {
         let hello: String
     }
 
-    struct TestLinks: JSONAPI.Links {
+    struct TestLinks: JSONAPIKit.Links {
         let testLink: Link<String, NoMetadata>
     }
 

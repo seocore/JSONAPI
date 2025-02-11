@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JSONAPI
+import JSONAPIKit
 
 class RelationshipTests: XCTestCase {
 
@@ -304,13 +304,13 @@ extension RelationshipTests {
 	typealias ToOneNullable = ToOneRelationship<TestEntity1?, NoIdMetadata, NoMetadata, NoLinks>
 	typealias ToOneNonNullable = ToOneRelationship<TestEntity1, NoIdMetadata, NoMetadata, NoLinks>
 
-	struct TestMeta: JSONAPI.Meta {
+	struct TestMeta: JSONAPIKit.Meta {
 		let a: String
 	}
 
-	typealias TestLink = JSONAPI.Link<String, NoMetadata>
+	typealias TestLink = JSONAPIKit.Link<String, NoMetadata>
 
-	struct TestLinks: JSONAPI.Links {
+	struct TestLinks: JSONAPIKit.Links {
 		let b: TestLink
 	}
 }

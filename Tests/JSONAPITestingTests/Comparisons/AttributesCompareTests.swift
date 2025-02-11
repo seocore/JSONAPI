@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 
 final class AttributesCompareTests: XCTestCase {
     func test_sameAttributes() throws {
@@ -90,7 +90,7 @@ final class AttributesCompareTests: XCTestCase {
     }
 }
 
-private struct TestAttributes: JSONAPI.Attributes {
+private struct TestAttributes: JSONAPIKit.Attributes {
     let string: Attribute<String>
     let int: Attribute<Int>
     let bool: Attribute<Bool>
@@ -117,7 +117,7 @@ private enum TestTransformer: Transformer {
     }
 }
 
-private struct NonAttributeTest: JSONAPI.Attributes {
+private struct NonAttributeTest: JSONAPIKit.Attributes {
     let string: String
     let int: Int
     let double: Double

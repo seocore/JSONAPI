@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 11/3/19.
 //
 
-import JSONAPI
+import JSONAPIKit
 
 extension Relationships {
     public func compare(to other: Self) -> [String: BasicComparison] {

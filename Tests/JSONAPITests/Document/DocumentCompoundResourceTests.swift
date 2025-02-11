@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import JSONAPITesting
-import JSONAPI
+import JSONAPIKitTesting
+import JSONAPIKit
 import XCTest
 
 final class DocumentCompoundResourceTests: XCTestCase {
@@ -19,7 +19,7 @@ final class DocumentCompoundResourceTests: XCTestCase {
             links: .none
         )
 
-        typealias Document = JSONAPI.Document<SingleResourceBody<DocumentTests.Author>, NoMetadata, NoLinks, NoIncludes, NoAPIDescription, UnknownJSONAPIError>
+        typealias Document = JSONAPIKit.Document<SingleResourceBody<DocumentTests.Author>, NoMetadata, NoLinks, NoIncludes, NoAPIDescription, UnknownJSONAPIError>
 
         let compoundAuthor = Document.CompoundResource(primary: author, relatives: [])
 
@@ -53,7 +53,7 @@ final class DocumentCompoundResourceTests: XCTestCase {
             links: .none
         )
 
-        typealias Document = JSONAPI.Document<SingleResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
+        typealias Document = JSONAPIKit.Document<SingleResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
 
         let compoundBook = Document.CompoundResource(primary: book, relatives: [])
 
@@ -87,7 +87,7 @@ final class DocumentCompoundResourceTests: XCTestCase {
             links: .none
         )
 
-        typealias Document = JSONAPI.Document<SingleResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
+        typealias Document = JSONAPIKit.Document<SingleResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
 
         let compoundBook = Document.CompoundResource(
             primary: book,
@@ -155,7 +155,7 @@ final class DocumentCompoundResourceTests: XCTestCase {
             links: .none
         )
 
-        typealias Document = JSONAPI.Document<SingleResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include2<DocumentTests.Author, DocumentTests.Book>, NoAPIDescription, UnknownJSONAPIError>
+        typealias Document = JSONAPIKit.Document<SingleResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include2<DocumentTests.Author, DocumentTests.Book>, NoAPIDescription, UnknownJSONAPIError>
 
         let compoundBook = Document.CompoundResource(
             primary: book,
@@ -208,7 +208,7 @@ final class DocumentCompoundResourceTests: XCTestCase {
             links: .none
         )
 
-        typealias Document = JSONAPI.Document<ManyResourceBody<DocumentTests.Author>, NoMetadata, NoLinks, NoIncludes, NoAPIDescription, UnknownJSONAPIError>
+        typealias Document = JSONAPIKit.Document<ManyResourceBody<DocumentTests.Author>, NoMetadata, NoLinks, NoIncludes, NoAPIDescription, UnknownJSONAPIError>
 
         let compoundAuthor = Document.CompoundResource(primary: author, relatives: [])
         let compoundAuthor2 = Document.CompoundResource(primary: author2, relatives: [])
@@ -254,7 +254,7 @@ final class DocumentCompoundResourceTests: XCTestCase {
             links: .none
         )
 
-        typealias Document = JSONAPI.Document<ManyResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
+        typealias Document = JSONAPIKit.Document<ManyResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
 
         let compoundBook = Document.CompoundResource(primary: book, relatives: [])
         let compoundBook2 = Document.CompoundResource(primary: book2, relatives: [])
@@ -300,7 +300,7 @@ final class DocumentCompoundResourceTests: XCTestCase {
             links: .none
         )
 
-        typealias Document = JSONAPI.Document<ManyResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
+        typealias Document = JSONAPIKit.Document<ManyResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
 
         let compoundBook = Document.CompoundResource(
             primary: book,
@@ -355,7 +355,7 @@ final class DocumentCompoundResourceTests: XCTestCase {
             links: .none
         )
 
-        typealias Document = JSONAPI.Document<ManyResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
+        typealias Document = JSONAPIKit.Document<ManyResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
 
         let compoundBook = Document.CompoundResource(
             primary: book,
@@ -417,7 +417,7 @@ final class DocumentCompoundResourceTests: XCTestCase {
             links: .none
         )
 
-        typealias Document = JSONAPI.Document<ManyResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
+        typealias Document = JSONAPIKit.Document<ManyResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
 
         let compoundBook = Document.CompoundResource(
             primary: book,
@@ -477,7 +477,7 @@ final class DocumentCompoundResourceTests: XCTestCase {
             links: .none
         )
 
-        typealias Document = JSONAPI.Document<ManyResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
+        typealias Document = JSONAPIKit.Document<ManyResourceBody<DocumentTests.Book>, NoMetadata, NoLinks, Include1<DocumentTests.Author>, NoAPIDescription, UnknownJSONAPIError>
 
         let compoundBook = Document.CompoundResource(
             primary: book,

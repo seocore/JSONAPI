@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 11/12/18.
 //
 
-import JSONAPI
+import JSONAPIKit
 
 private var uniqueStringCounter = 0
 

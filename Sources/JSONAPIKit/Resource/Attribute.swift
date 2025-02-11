@@ -23,7 +23,7 @@ extension AttributeType {
 // MARK: TransformedAttribute
 
 /// A TransformedAttribute takes a Codable type and attempts to turn it into another type.
-public struct TransformedAttribute<RawValue: Codable, Transformer: JSONAPI.Transformer>: AttributeType where Transformer.From == RawValue {
+public struct TransformedAttribute<RawValue: Codable, Transformer: JSONAPIKit.Transformer>: AttributeType where Transformer.From == RawValue {
     public let rawValue: RawValue
 
     public let value: Transformer.To
@@ -65,7 +65,7 @@ extension TransformedAttribute: Equatable where Transformer.From: Equatable, Tra
 
 /// A ValidatedAttribute does not transform its raw value, but it throws
 /// an error if the raw value does not match expectations.
-public typealias ValidatedAttribute<RawValue: Codable, Validator: JSONAPI.Validator> = TransformedAttribute<RawValue, Validator> where RawValue == Validator.From
+public typealias ValidatedAttribute<RawValue: Codable, Validator: JSONAPIKit.Validator> = TransformedAttribute<RawValue, Validator> where RawValue == Validator.From
 
 // MARK: Attribute
 

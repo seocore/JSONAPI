@@ -1,5 +1,5 @@
 
-import JSONAPI
+import JSONAPIKit
 
 extension Attribute: ExpressibleByUnicodeScalarLiteral where RawValue: ExpressibleByUnicodeScalarLiteral {
     public typealias UnicodeScalarLiteralType = RawValue.UnicodeScalarLiteralType

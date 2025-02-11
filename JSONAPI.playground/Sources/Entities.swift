@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JSONAPI
+import JSONAPIKit
 
 /*******
 
@@ -33,7 +33,7 @@ public enum PersonDescription: ResourceObjectDescription {
 
 	public static var jsonType: String { return "people" }
 	
-	public struct Attributes: JSONAPI.Attributes {
+	public struct Attributes: JSONAPIKit.Attributes {
 		public let name: Attribute<[String]>
 		public let favoriteColor: Attribute<String>
 
@@ -47,7 +47,7 @@ public enum PersonDescription: ResourceObjectDescription {
 		}
 	}
 	
-	public struct Relationships: JSONAPI.Relationships {
+	public struct Relationships: JSONAPIKit.Relationships {
 		public let friends: ToMany<Person>
 		public let dogs: ToMany<Dog>
 		public let home: ToOne<House>
@@ -72,7 +72,7 @@ public enum DogDescription: ResourceObjectDescription {
 
 	public static var jsonType: String { return "dogs" }
 
-	public struct Attributes: JSONAPI.Attributes {
+	public struct Attributes: JSONAPIKit.Attributes {
 		public let name: Attribute<String>
 
 		public init(name: Attribute<String>) {
@@ -80,7 +80,7 @@ public enum DogDescription: ResourceObjectDescription {
 		}
 	}
 
-	public struct Relationships: JSONAPI.Relationships {
+	public struct Relationships: JSONAPIKit.Relationships {
 		public let owner: ToOne<Person?>
 
 		public init(owner: ToOne<Person?>) {
@@ -95,7 +95,7 @@ public enum AlternativeDogDescription: ResourceObjectDescription {
 
 	public static var jsonType: String { return "dogs" }
 
-	public struct Attributes: JSONAPI.Attributes {
+	public struct Attributes: JSONAPIKit.Attributes {
 		public let name: Attribute<String>
 
 		public init(name: Attribute<String>) {
@@ -103,7 +103,7 @@ public enum AlternativeDogDescription: ResourceObjectDescription {
 		}
 	}
 
-	public struct Relationships: JSONAPI.Relationships {
+	public struct Relationships: JSONAPIKit.Relationships {
 		public let human: ToOne<Person?>
 
 		public init(human: ToOne<Person?>) {
@@ -123,7 +123,7 @@ public enum MutableDogDescription: ResourceObjectDescription {
 
     public static var jsonType: String { return "dogs" }
 
-    public struct Attributes: JSONAPI.Attributes {
+    public struct Attributes: JSONAPIKit.Attributes {
         public var name: Attribute<String>
 
         public init(name: Attribute<String>) {
@@ -131,7 +131,7 @@ public enum MutableDogDescription: ResourceObjectDescription {
         }
     }
 
-    public struct Relationships: JSONAPI.Relationships {
+    public struct Relationships: JSONAPIKit.Relationships {
         public var owner: ToOne<Person?>
 
         public init(owner: ToOne<Person?>) {
@@ -162,8 +162,8 @@ public enum HouseDescription: ResourceObjectDescription {
 
 public typealias House = ExampleEntity<HouseDescription>
 
-public typealias SingleDogDocument = JSONAPI.Document<SingleResourceBody<Dog>, NoMetadata, NoLinks, NoIncludes, NoAPIDescription, BasicJSONAPIError<String>>
+public typealias SingleDogDocument = JSONAPIKit.Document<SingleResourceBody<Dog>, NoMetadata, NoLinks, NoIncludes, NoAPIDescription, BasicJSONAPIError<String>>
 
-public typealias MutableDogDocument = JSONAPI.Document<SingleResourceBody<MutableDog>, NoMetadata, NoLinks, NoIncludes, NoAPIDescription, BasicJSONAPIError<String>>
+public typealias MutableDogDocument = JSONAPIKit.Document<SingleResourceBody<MutableDog>, NoMetadata, NoLinks, NoIncludes, NoAPIDescription, BasicJSONAPIError<String>>
 
-public typealias BatchPeopleDocument = JSONAPI.Document<ManyResourceBody<Person>, NoMetadata, NoLinks, Include2<Dog, House>, NoAPIDescription, BasicJSONAPIError<String>>
+public typealias BatchPeopleDocument = JSONAPIKit.Document<ManyResourceBody<Person>, NoMetadata, NoLinks, Include2<Dog, House>, NoAPIDescription, BasicJSONAPIError<String>>

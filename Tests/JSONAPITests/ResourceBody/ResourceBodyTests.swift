@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JSONAPI
+import JSONAPIKit
 
 class ResourceBodyTests: XCTestCase {
 
@@ -196,7 +196,7 @@ extension ResourceBodyTests {
 
         typealias Relationships = NoRelationships
 
-        struct Attributes: JSONAPI.SparsableAttributes {
+        struct Attributes: JSONAPIKit.SparsableAttributes {
             let title: Attribute<String>
 
             public enum CodingKeys: String, Equatable, CodingKey {

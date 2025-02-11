@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import JSONAPITesting
+@testable import JSONAPIKitTesting
 
 final class ArrayCompareTests: XCTestCase {
     func test_same() {

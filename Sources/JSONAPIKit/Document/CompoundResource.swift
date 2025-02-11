@@ -6,8 +6,8 @@
 //
 
 public protocol CompoundResourceProtocol {
-    associatedtype JSONAPIModel: JSONAPI.ResourceObjectType
-    associatedtype JSONAPIIncludeType: JSONAPI.Include
+    associatedtype JSONAPIModel: JSONAPIKit.ResourceObjectType
+    associatedtype JSONAPIIncludeType: JSONAPIKit.Include
 
     var primary: JSONAPIModel { get }
     var relatives: [JSONAPIIncludeType] { get }
@@ -30,7 +30,7 @@ public protocol CompoundResourceProtocol {
 /// - Important: This type is not intended to guarantee
 ///     that all `relationships` of the primary resource are available
 ///     in the `relatives` array.
-public struct CompoundResource<JSONAPIModel: JSONAPI.ResourceObjectType, JSONAPIIncludeType: JSONAPI.Include>: Equatable, CompoundResourceProtocol {
+public struct CompoundResource<JSONAPIModel: JSONAPIKit.ResourceObjectType, JSONAPIIncludeType: JSONAPIKit.Include>: Equatable, CompoundResourceProtocol {
     public let primary: JSONAPIModel
     public let relatives: [JSONAPIIncludeType]
 
@@ -72,7 +72,7 @@ extension Sequence where Element: CompoundResourceProtocol {
 }
 
 extension EncodableJSONAPIDocument where PrimaryResourceBody.PrimaryResource: ResourceObjectType {
-    public typealias CompoundResource = JSONAPI.CompoundResource<PrimaryResourceBody.PrimaryResource, IncludeType>
+    public typealias CompoundResource = JSONAPIKit.CompoundResource<PrimaryResourceBody.PrimaryResource, IncludeType>
 }
 
 extension SucceedableJSONAPIDocument where PrimaryResourceBody: SingleResourceBodyProtocol, PrimaryResourceBody.PrimaryResource: ResourceObjectType {

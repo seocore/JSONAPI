@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 
 class ResourceObjectTests: XCTestCase {
 
@@ -709,7 +709,7 @@ extension ResourceObjectTests {
 
 		typealias Attributes = NoAttributes
 
-		struct Relationships: JSONAPI.Relationships {
+		struct Relationships: JSONAPIKit.Relationships {
 			let other: ToOneRelationship<TestEntity1, NoIdMetadata, NoMetadata, NoLinks>
 		}
 	}
@@ -721,7 +721,7 @@ extension ResourceObjectTests {
 
 		typealias Attributes = NoAttributes
 
-		struct Relationships: JSONAPI.Relationships {
+		struct Relationships: JSONAPIKit.Relationships {
 			let others: ToManyRelationship<TestEntity1, NoIdMetadata, NoMetadata, NoLinks>
 		}
 	}
@@ -731,11 +731,11 @@ extension ResourceObjectTests {
 	enum TestEntityType4: ResourceObjectDescription {
 		static var jsonType: String { return "fourth_test_entities"}
 
-		struct Relationships: JSONAPI.Relationships {
+		struct Relationships: JSONAPIKit.Relationships {
 			let other: ToOneRelationship<TestEntity2, NoIdMetadata, NoMetadata, NoLinks>
 		}
 
-		struct Attributes: JSONAPI.Attributes {
+		struct Attributes: JSONAPIKit.Attributes {
 			let word: Attribute<String>
 			let number: Attribute<Int>
 			let array: Attribute<[Double]>
@@ -755,7 +755,7 @@ extension ResourceObjectTests {
 
 		typealias Relationships = NoRelationships
 
-		struct Attributes: JSONAPI.Attributes {
+		struct Attributes: JSONAPIKit.Attributes {
 			let floater: Attribute<Double>
 		}
 	}
@@ -767,7 +767,7 @@ extension ResourceObjectTests {
 
 		typealias Relationships = NoRelationships
 
-		struct Attributes: JSONAPI.Attributes {
+		struct Attributes: JSONAPIKit.Attributes {
 			let here: Attribute<String>
 			let maybeHere: Attribute<String>?
 			let maybeNull: Attribute<String?>
@@ -781,7 +781,7 @@ extension ResourceObjectTests {
 
 		typealias Relationships = NoRelationships
 
-		struct Attributes: JSONAPI.Attributes {
+		struct Attributes: JSONAPIKit.Attributes {
 			let here: Attribute<String>
 			let maybeHereMaybeNull: Attribute<String?>?
 		}
@@ -794,7 +794,7 @@ extension ResourceObjectTests {
 
 		typealias Relationships = NoRelationships
 
-		struct Attributes: JSONAPI.Attributes {
+		struct Attributes: JSONAPIKit.Attributes {
 			let string: Attribute<String>
 			let int: Attribute<Int>
 			let stringFromInt: TransformedAttribute<Int, IntToString>
@@ -812,7 +812,7 @@ extension ResourceObjectTests {
 
 		typealias Attributes = NoAttributes
 
-		public struct Relationships: JSONAPI.Relationships {
+		public struct Relationships: JSONAPIKit.Relationships {
             let meta: MetaRelationship<TestEntityMeta, NoLinks>
 
             let optionalMeta: MetaRelationship<TestEntityMeta, NoLinks>?
@@ -839,7 +839,7 @@ extension ResourceObjectTests {
 
 		typealias Attributes = NoAttributes
 
-		public struct Relationships: JSONAPI.Relationships {
+		public struct Relationships: JSONAPIKit.Relationships {
 			let selfRef: ToOneRelationship<TestEntity10, NoIdMetadata, NoMetadata, NoLinks>
 			let selfRefs: ToManyRelationship<TestEntity10, NoIdMetadata, NoMetadata, NoLinks>
 		}
@@ -850,7 +850,7 @@ extension ResourceObjectTests {
 	enum TestEntityType11: ResourceObjectDescription {
 		public static var jsonType: String { return "eleventh_test_entities" }
 
-		public struct Attributes: JSONAPI.Attributes {
+		public struct Attributes: JSONAPIKit.Attributes {
 			let number: ValidatedAttribute<Int, IntOver10>
 		}
 
@@ -864,7 +864,7 @@ extension ResourceObjectTests {
 
 		typealias Attributes = NoAttributes
 
-		public struct Relationships: JSONAPI.Relationships {
+		public struct Relationships: JSONAPIKit.Relationships {
 			public init() {
         optionalMeta = nil
 				optionalOne = nil
@@ -884,23 +884,23 @@ extension ResourceObjectTests {
 
 	typealias TestEntity12 = BasicEntity<TestEntityType12>
 
-  enum TestEntityOptionalMetaType: JSONAPI.ResourceObjectDescription {
+  enum TestEntityOptionalMetaType: JSONAPIKit.ResourceObjectDescription {
       public static var jsonType: String { return "test_entities" }
 
       typealias Attributes = NoAttributes
       typealias Relationships = NoRelationships
   }
 
-  struct UnimportantMeta: JSONAPI.Meta {
+  struct UnimportantMeta: JSONAPIKit.Meta {
       let property1: String
   }
 
-  typealias TestEntityOptionalMeta = JSONAPI.ResourceObject<TestEntityOptionalMetaType, UnimportantMeta?, NoLinks, String>
+  typealias TestEntityOptionalMeta = JSONAPIKit.ResourceObject<TestEntityOptionalMetaType, UnimportantMeta?, NoLinks, String>
 
 	enum UnidentifiedTestEntityType: ResourceObjectDescription {
 		public static var jsonType: String { return "unidentified_test_entities" }
 
-		struct Attributes: JSONAPI.Attributes {
+		struct Attributes: JSONAPIKit.Attributes {
 			let me: Attribute<String>?
 		}
 
@@ -918,7 +918,7 @@ extension ResourceObjectTests {
 	enum TestEntityWithMetaAttributeDescription: ResourceObjectDescription {
 		public static var jsonType: String { return "meta_attribute_entity" }
 
-		struct Attributes: JSONAPI.Attributes {
+		struct Attributes: JSONAPIKit.Attributes {
 			var metaAttribute: (TestEntityWithMetaAttribute) -> Bool {
 				return { entity in
 					(entity.id.rawValue.count % 2) == 0
@@ -936,7 +936,7 @@ extension ResourceObjectTests {
 
 		typealias Attributes = NoAttributes
 
-		struct Relationships: JSONAPI.Relationships {
+		struct Relationships: JSONAPIKit.Relationships {
 			var metaRelationship: (TestEntityWithMetaRelationship) -> TestEntity1.ID {
 				return { entity in
 					return TestEntity1.ID(rawValue: "hello")
@@ -990,12 +990,12 @@ extension ResourceObjectTests {
 		}
 	}
 
-	struct TestEntityMeta: JSONAPI.Meta {
+	struct TestEntityMeta: JSONAPIKit.Meta {
 		let x: String
 		let y: Int?
 	}
 
-	struct TestEntityLinks: JSONAPI.Links {
+	struct TestEntityLinks: JSONAPIKit.Links {
 		let link1: Link<String, NoMetadata>
 	}
 }
@@ -1003,37 +1003,37 @@ extension ResourceObjectTests {
 extension Foundation.URL : JSONAPIURL {}
 
 enum ResourceObjectLinksTest {
-    struct PersonStubDescription: JSONAPI.ResourceObjectDescription {
+    struct PersonStubDescription: JSONAPIKit.ResourceObjectDescription {
         static let jsonType: String = "people"
 
         typealias Attributes = NoAttributes
         typealias Relationships = NoRelationships
     }
 
-    typealias Person = JSONAPI.ResourceObject<PersonStubDescription, NoMetadata, NoLinks, String>
+    typealias Person = JSONAPIKit.ResourceObject<PersonStubDescription, NoMetadata, NoLinks, String>
 
-    struct ArticleAuthorRelationshipLinks: JSONAPI.Links {
-        let `self`: JSONAPI.Link<URL, NoMetadata>
-        let related: JSONAPI.Link<URL, NoMetadata>
+    struct ArticleAuthorRelationshipLinks: JSONAPIKit.Links {
+        let `self`: JSONAPIKit.Link<URL, NoMetadata>
+        let related: JSONAPIKit.Link<URL, NoMetadata>
     }
 
-    struct ArticleLinks: JSONAPI.Links {
-        let `self`: JSONAPI.Link<URL, NoMetadata>
+    struct ArticleLinks: JSONAPIKit.Links {
+        let `self`: JSONAPIKit.Link<URL, NoMetadata>
     }
 
-    struct ArticleDescription: JSONAPI.ResourceObjectDescription {
+    struct ArticleDescription: JSONAPIKit.ResourceObjectDescription {
         static let jsonType: String = "articles"
 
-        struct Attributes: JSONAPI.Attributes {
+        struct Attributes: JSONAPIKit.Attributes {
             let title: Attribute<String>
         }
 
-        struct Relationships: JSONAPI.Relationships {
+        struct Relationships: JSONAPIKit.Relationships {
             let author: ToOneRelationship<Person, NoIdMetadata, NoMetadata, ArticleAuthorRelationshipLinks>
         }
     }
 
-    typealias Article = JSONAPI.ResourceObject<ArticleDescription, NoMetadata, ArticleLinks, String>
+    typealias Article = JSONAPIKit.ResourceObject<ArticleDescription, NoMetadata, ArticleLinks, String>
 
     static let json = """
     {

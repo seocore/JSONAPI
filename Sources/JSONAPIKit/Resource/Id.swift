@@ -38,7 +38,7 @@ public struct Unidentified: MaybeRawId, CustomStringConvertible {
 }
 
 public protocol OptionalId: Codable {
-    associatedtype IdentifiableType: JSONAPI.JSONTyped
+    associatedtype IdentifiableType: JSONAPIKit.JSONTyped
     associatedtype RawType: MaybeRawId
 
     var rawValue: RawType { get }
@@ -77,7 +77,7 @@ public protocol CreatableIdType: IdType {
 
 /// An ResourceObject ID. These IDs can be encoded to or decoded from
 /// JSON API IDs.
-public struct Id<RawType: MaybeRawId, IdentifiableType: JSONAPI.JSONTyped>: Equatable, OptionalId {
+public struct Id<RawType: MaybeRawId, IdentifiableType: JSONAPIKit.JSONTyped>: Equatable, OptionalId {
 
     public let rawValue: RawType
 

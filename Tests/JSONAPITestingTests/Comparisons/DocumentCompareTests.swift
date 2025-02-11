@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 
 final class DocumentCompareTests: XCTestCase {
     func test_same() {
@@ -96,7 +96,7 @@ final class DocumentCompareTests: XCTestCase {
 
     func test_differentLinks() {
         XCTAssertEqual(d11.compare(to: d13).differences, [
-            "Body": ##"(Links: TestLinks(link: JSONAPI.Link<Swift.String, JSONAPI.NoMetadata>(url: "http://google.com", meta: No Metadata)) ≠ TestLinks(link: JSONAPI.Link<Swift.String, JSONAPI.NoMetadata>(url: "http://yahoo.com", meta: No Metadata)))"##
+            "Body": ##"(Links: TestLinks(link: JSONAPIKit.Link<Swift.String, JSONAPIKit.NoMetadata>(url: "http://google.com", meta: No Metadata)) ≠ TestLinks(link: JSONAPIKit.Link<Swift.String, JSONAPIKit.NoMetadata>(url: "http://yahoo.com", meta: No Metadata)))"##
         ])
     }
 
@@ -107,16 +107,16 @@ final class DocumentCompareTests: XCTestCase {
     }
 }
 
-fileprivate enum TestDescription: JSONAPI.ResourceObjectDescription {
+fileprivate enum TestDescription: JSONAPIKit.ResourceObjectDescription {
     static let jsonType: String = "test_type"
 
-    struct Attributes: JSONAPI.Attributes {
+    struct Attributes: JSONAPIKit.Attributes {
         let name: Attribute<String>
         let age: Attribute<Int>
         let favoriteColor: Attribute<String?>
     }
 
-    struct Relationships: JSONAPI.Relationships {
+    struct Relationships: JSONAPIKit.Relationships {
         let bestFriend: ToOneRelationship<TestType2?, NoIdMetadata, NoMetadata, NoLinks>
         let parents: ToManyRelationship<TestType, NoIdMetadata, NoMetadata, NoLinks>
     }
@@ -124,16 +124,16 @@ fileprivate enum TestDescription: JSONAPI.ResourceObjectDescription {
 
 fileprivate typealias TestType = ResourceObject<TestDescription, NoMetadata, NoLinks, String>
 
-fileprivate enum TestDescription2: JSONAPI.ResourceObjectDescription {
+fileprivate enum TestDescription2: JSONAPIKit.ResourceObjectDescription {
     static let jsonType: String = "test_type2"
 
-    struct Attributes: JSONAPI.Attributes {
+    struct Attributes: JSONAPIKit.Attributes {
         let name: Attribute<String>
         let age: Attribute<Int>
         let favoriteColor: Attribute<String?>
     }
 
-    struct Relationships: JSONAPI.Relationships {
+    struct Relationships: JSONAPIKit.Relationships {
         let bestFriend: ToOneRelationship<TestType2?, NoIdMetadata, NoMetadata, NoLinks>
         let parents: ToManyRelationship<TestType2, NoIdMetadata, NoMetadata, NoLinks>
     }
@@ -141,9 +141,9 @@ fileprivate enum TestDescription2: JSONAPI.ResourceObjectDescription {
 
 fileprivate typealias TestType2 = ResourceObject<TestDescription2, NoMetadata, NoLinks, String>
 
-fileprivate typealias SingleDocument = JSONAPI.Document<SingleResourceBody<TestType>, NoMetadata, NoLinks, Include2<TestType, TestType2>, NoAPIDescription, BasicJSONAPIError<String>>
+fileprivate typealias SingleDocument = JSONAPIKit.Document<SingleResourceBody<TestType>, NoMetadata, NoLinks, Include2<TestType, TestType2>, NoAPIDescription, BasicJSONAPIError<String>>
 
-fileprivate struct TestMetadata: JSONAPI.Meta, CustomStringConvertible {
+fileprivate struct TestMetadata: JSONAPIKit.Meta, CustomStringConvertible {
     let total: Int
 
     var description: String {
@@ -151,17 +151,17 @@ fileprivate struct TestMetadata: JSONAPI.Meta, CustomStringConvertible {
     }
 }
 
-fileprivate struct TestLinks: JSONAPI.Links {
+fileprivate struct TestLinks: JSONAPIKit.Links {
     let link: Link<String, NoMetadata>
 }
 
 typealias TestAPIDescription = APIDescription<NoMetadata>
 
-fileprivate typealias SingleDocumentWithMetaAndLinks = JSONAPI.Document<SingleResourceBody<TestType>, TestMetadata, TestLinks, Include2<TestType, TestType2>, TestAPIDescription, BasicJSONAPIError<String>>
+fileprivate typealias SingleDocumentWithMetaAndLinks = JSONAPIKit.Document<SingleResourceBody<TestType>, TestMetadata, TestLinks, Include2<TestType, TestType2>, TestAPIDescription, BasicJSONAPIError<String>>
 
-fileprivate typealias OptionalSingleDocument = JSONAPI.Document<SingleResourceBody<TestType?>, NoMetadata, NoLinks, Include2<TestType, TestType2>, NoAPIDescription, BasicJSONAPIError<String>>
+fileprivate typealias OptionalSingleDocument = JSONAPIKit.Document<SingleResourceBody<TestType?>, NoMetadata, NoLinks, Include2<TestType, TestType2>, NoAPIDescription, BasicJSONAPIError<String>>
 
-fileprivate typealias ManyDocument = JSONAPI.Document<ManyResourceBody<TestType>, NoMetadata, NoLinks, Include2<TestType, TestType2>, NoAPIDescription, BasicJSONAPIError<String>>
+fileprivate typealias ManyDocument = JSONAPIKit.Document<ManyResourceBody<TestType>, NoMetadata, NoLinks, Include2<TestType, TestType2>, NoAPIDescription, BasicJSONAPIError<String>>
 
 fileprivate let r1 = TestType(
     id: "1",

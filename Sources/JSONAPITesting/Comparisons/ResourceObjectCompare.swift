@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 11/3/19.
 //
 
-import JSONAPI
+import JSONAPIKit
 
 public struct ResourceObjectComparison: Equatable, PropertyComparison {
     public typealias ComparisonHash = [String: BasicComparison]

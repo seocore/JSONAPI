@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JSONAPI
+import JSONAPIKit
 
 class LinksTests: XCTestCase {
 	func test_linkWithNoMeta() {
@@ -71,12 +71,12 @@ class LinksTests: XCTestCase {
 extension LinksTests {
 	typealias URL = String
 
-	struct Links: JSONAPI.Links {
+	struct Links: JSONAPIKit.Links {
 		let link: Link<LinksTests.URL, NoMetadata>
 		let optionalLink: Link<LinksTests.URL, NoMetadata>?
 	}
 
-	struct Metadata: JSONAPI.Meta {
+	struct Metadata: JSONAPIKit.Meta {
 		let hello: String
 	}
 }

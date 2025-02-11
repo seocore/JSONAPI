@@ -3,15 +3,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "JSONAPI",
+    name: "JSONAPIKit",
     platforms: [
         .macOS(.v10_10),
         .iOS(.v10)
     ],
     products: [
         .library(
-            name: "JSONAPI",
-            targets: ["JSONAPI"]),
+            name: "JSONAPIKit",
+            targets: ["JSONAPIKit"]),
         .library(
             name: "JSONAPITesting",
             targets: ["JSONAPITesting"])
@@ -21,17 +21,17 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "JSONAPI",
+            name: "JSONAPIKit",
             dependencies: ["Poly"]),
         .target(
             name: "JSONAPITesting",
-            dependencies: ["JSONAPI"]),
+            dependencies: ["JSONAPIKit"]),
         .testTarget(
             name: "JSONAPITests",
-            dependencies: ["JSONAPI", "JSONAPITesting"]),
+            dependencies: ["JSONAPIKit", "JSONAPITesting"]),
         .testTarget(
             name: "JSONAPITestingTests",
-            dependencies: ["JSONAPI", "JSONAPITesting"])
+            dependencies: ["JSONAPIKit", "JSONAPITesting"])
     ],
     swiftLanguageVersions: [.v5]
 )

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JSONAPI
+import JSONAPIKit
 import XCTest
 
 final class GenericJSONAPIErrorTests: XCTestCase {

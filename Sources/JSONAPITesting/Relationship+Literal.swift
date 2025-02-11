@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 11/27/18.
 //
 
-import JSONAPI
+import JSONAPIKit
 
 extension ToOneRelationship: ExpressibleByNilLiteral where Identifiable.ID: ExpressibleByNilLiteral, IdMetaType == NoIdMetadata, MetaType == NoMetadata, LinksType == NoLinks {
     public init(nilLiteral: ()) {

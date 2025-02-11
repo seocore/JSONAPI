@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 
 class Attribute_FunctorTests: XCTestCase {
 	func test_mapGuaranteed() {
@@ -41,7 +41,7 @@ extension Attribute_FunctorTests {
 	enum TestTypeDescription: ResourceObjectDescription {
 		public static var jsonType: String { return "test" }
 
-		public struct Attributes: JSONAPI.Attributes {
+		public struct Attributes: JSONAPIKit.Attributes {
 			let name: Attribute<String>
 			let number: TransformedAttribute<Double, DoubleToString>
 			var computedString: Attribute<String> {

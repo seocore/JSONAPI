@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 5/29/20.
 //
 
-import JSONAPI
+import JSONAPIKit
 import XCTest
 
 final class SwiftIdentifiableTests: XCTestCase {
@@ -40,7 +40,7 @@ final class SwiftIdentifiableTests: XCTestCase {
     }
 }
 
-fileprivate enum TestDescription: JSONAPI.ResourceObjectDescription {
+fileprivate enum TestDescription: JSONAPIKit.ResourceObjectDescription {
     static let jsonType: String = "test"
 
     typealias Attributes = NoAttributes

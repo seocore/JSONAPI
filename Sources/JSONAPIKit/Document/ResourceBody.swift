@@ -57,7 +57,7 @@ public protocol SingleResourceBodyProtocol: EncodableResourceBody {
 /// A type allowing for a document body containing 1 primary resource.
 /// If the `Entity` specialization is an `Optional` type, the body can contain
 /// 0 or 1 primary resources.
-public struct SingleResourceBody<PrimaryResource: JSONAPI.OptionalEncodablePrimaryResource>: SingleResourceBodyProtocol {
+public struct SingleResourceBody<PrimaryResource: JSONAPIKit.OptionalEncodablePrimaryResource>: SingleResourceBodyProtocol {
     public let value: PrimaryResource
 
     public init(resourceObject: PrimaryResource) {
@@ -72,7 +72,7 @@ public protocol ManyResourceBodyProtocol: EncodableResourceBody {
 }
 
 /// A type allowing for a document body containing 0 or more primary resources.
-public struct ManyResourceBody<PrimaryResource: JSONAPI.EncodablePrimaryResource>: ManyResourceBodyProtocol, ResourceBodyAppendable {
+public struct ManyResourceBody<PrimaryResource: JSONAPIKit.EncodablePrimaryResource>: ManyResourceBodyProtocol, ResourceBodyAppendable {
     public let values: [PrimaryResource]
 
     public init(resourceObjects: [PrimaryResource]) {

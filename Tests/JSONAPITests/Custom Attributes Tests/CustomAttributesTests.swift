@@ -6,8 +6,8 @@
 //
 
 import XCTest
-@testable import JSONAPI
-import JSONAPITesting
+@testable import JSONAPIKit
+import JSONAPIKitTesting
 
 class CustomAttributesTests: XCTestCase {
 	func test_customDecode() {
@@ -42,7 +42,7 @@ extension CustomAttributesTests {
 	enum CustomAttributeEntityDescription: ResourceObjectDescription {
 		public static var jsonType: String { return "test1" }
 
-		public struct Attributes: JSONAPI.Attributes {
+		public struct Attributes: JSONAPIKit.Attributes {
 			let firstName: Attribute<String>
 			public let name: Attribute<String>
 
@@ -60,7 +60,7 @@ extension CustomAttributesTests {
 	enum CustomKeysEntityDescription: ResourceObjectDescription {
 		public static var jsonType: String { return "test1" }
 
-		public struct Attributes: JSONAPI.Attributes {
+		public struct Attributes: JSONAPIKit.Attributes {
 			public let firstNameSilly: Attribute<String>
 			public let lastNameSilly: Attribute<String>
 

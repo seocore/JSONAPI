@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 11/4/19.
 //
 
-import JSONAPI
+import JSONAPIKit
 import Poly
 
 public struct IncludesComparison: Equatable, PropertyComparison {

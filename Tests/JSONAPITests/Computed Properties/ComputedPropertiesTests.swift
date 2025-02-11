@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 
 class ComputedPropertiesTests: XCTestCase {
 	func test_DecodeIgnoresComputed() {
@@ -48,7 +48,7 @@ extension ComputedPropertiesTests {
 	public enum TestTypeDescription: ResourceObjectDescription {
 		public static var jsonType: String { return "test" }
 
-		public struct Attributes: JSONAPI.Attributes {
+		public struct Attributes: JSONAPIKit.Attributes {
 			public let name: Attribute<String>
 			private let secret: Attribute<String>
 
@@ -65,7 +65,7 @@ extension ComputedPropertiesTests {
 			}
 		}
 
-		public struct Relationships: JSONAPI.Relationships {
+		public struct Relationships: JSONAPIKit.Relationships {
 			public let other: ToOneRelationship<TestType, NoIdMetadata, NoMetadata, NoLinks>
 
 			public var computed: ToOneRelationship<TestType, NoIdMetadata, NoMetadata, NoLinks> {

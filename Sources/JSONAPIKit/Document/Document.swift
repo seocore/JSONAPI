@@ -8,10 +8,10 @@
 import Poly
 
 public protocol DocumentBodyDataContext {
-    associatedtype PrimaryResourceBody: JSONAPI.EncodableResourceBody
-    associatedtype MetaType: JSONAPI.Meta
-    associatedtype LinksType: JSONAPI.Links
-    associatedtype IncludeType: JSONAPI.Include
+    associatedtype PrimaryResourceBody: JSONAPIKit.EncodableResourceBody
+    associatedtype MetaType: JSONAPIKit.Meta
+    associatedtype LinksType: JSONAPIKit.Links
+    associatedtype IncludeType: JSONAPIKit.Include
 }
 
 public protocol DocumentBodyContext: DocumentBodyDataContext {
@@ -137,7 +137,7 @@ public protocol FailableJSONAPIDocument: EncodableJSONAPIDocument {
 
 /// A `CodableJSONAPIDocument` supports encoding and decoding of a JSON:API
 /// compliant Document.
-public protocol CodableJSONAPIDocument: EncodableJSONAPIDocument, Decodable where PrimaryResourceBody: JSONAPI.CodableResourceBody, IncludeType: Decodable {}
+public protocol CodableJSONAPIDocument: EncodableJSONAPIDocument, Decodable where PrimaryResourceBody: JSONAPIKit.CodableResourceBody, IncludeType: Decodable {}
 
 /// A JSON API Document represents the entire body
 /// of a JSON API request or the entire body of
@@ -147,7 +147,7 @@ public protocol CodableJSONAPIDocument: EncodableJSONAPIDocument, Decodable wher
 /// API uses snake case, you will want to use
 /// a conversion such as the one offerred by the
 /// Foundation JSONEncoder/Decoder: `KeyDecodingStrategy`
-public struct Document<PrimaryResourceBody: JSONAPI.EncodableResourceBody, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links, IncludeType: JSONAPI.Include, APIDescription: APIDescriptionType, Error: JSONAPIError>: EncodableJSONAPIDocument, SucceedableJSONAPIDocument, FailableJSONAPIDocument {
+public struct Document<PrimaryResourceBody: JSONAPIKit.EncodableResourceBody, MetaType: JSONAPIKit.Meta, LinksType: JSONAPIKit.Links, IncludeType: JSONAPIKit.Include, APIDescription: APIDescriptionType, Error: JSONAPIError>: EncodableJSONAPIDocument, SucceedableJSONAPIDocument, FailableJSONAPIDocument {
     public typealias Include = IncludeType
     public typealias BodyData = Body.Data
 
@@ -282,7 +282,7 @@ extension Document.Body.Data where PrimaryResourceBody: ResourceBodyAppendable, 
 
 extension Document where IncludeType == NoIncludes {
     /// Create a new Document with the given includes.
-    public func including<I: JSONAPI.Include>(_ includes: Includes<I>) -> Document<PrimaryResourceBody, MetaType, LinksType, I, APIDescription, Error> {
+    public func including<I: JSONAPIKit.Include>(_ includes: Includes<I>) -> Document<PrimaryResourceBody, MetaType, LinksType, I, APIDescription, Error> {
         // Note that if IncludeType is NoIncludes, then we allow anything
         // to be included, but if IncludeType already specifies a type
         // of thing to be expected then we lock that down.
@@ -658,7 +658,7 @@ extension Document.SuccessDocument: Decodable, CodableJSONAPIDocument
 
 extension Document.SuccessDocument where IncludeType == NoIncludes {
     /// Create a new Document with the given includes.
-    public func including<I: JSONAPI.Include>(_ includes: Includes<I>) -> Document<PrimaryResourceBody, MetaType, LinksType, I, APIDescription, Error>.SuccessDocument {
+    public func including<I: JSONAPIKit.Include>(_ includes: Includes<I>) -> Document<PrimaryResourceBody, MetaType, LinksType, I, APIDescription, Error>.SuccessDocument {
         // Note that if IncludeType is NoIncludes, then we allow anything
         // to be included, but if IncludeType already specifies a type
         // of thing to be expected then we lock that down.

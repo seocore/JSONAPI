@@ -20,7 +20,7 @@ public protocol RelationshipType {
 /// If the server is going to deliver one or more resource's `id`/`type` in a `data`
 /// entry, you want to use either the `ToOneRelationship` or the
 /// `ToManyRelationship` instead.
-public struct MetaRelationship<MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>: RelationshipType, Equatable {
+public struct MetaRelationship<MetaType: JSONAPIKit.Meta, LinksType: JSONAPIKit.Links>: RelationshipType, Equatable {
 
     public let meta: MetaType
     public let links: LinksType
@@ -34,16 +34,16 @@ public struct MetaRelationship<MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>
 /// A `ResourceObject` relationship that can be encoded to or decoded from
 /// a JSON API "Resource Linkage."
 ///
-/// See https://jsonapi.org/format/#document-resource-object-linkage
+/// See https://JSONAPIKit.org/format/#document-resource-object-linkage
 ///
 /// A convenient typealias might make your code much more legible: `One<ResourceObjectDescription>`
 ///
 /// The `IdMetaType` (if not `NoIdMetadata`) will be parsed out of the Resource Identifier Object.
-/// (see https://jsonapi.org/format/#document-resource-identifier-objects)
+/// (see https://JSONAPIKit.org/format/#document-resource-identifier-objects)
 ///
 /// The `MetaType` (if not `NoMetadata`) will be parsed out of the Relationship Object.
-/// (see https://jsonapi.org/format/#document-resource-object-relationships)
-public struct ToOneRelationship<Identifiable: JSONAPI.JSONAPIIdentifiable, IdMetaType: JSONAPI.Meta, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>: RelationshipType, Equatable {
+/// (see https://JSONAPIKit.org/format/#document-resource-object-relationships)
+public struct ToOneRelationship<Identifiable: JSONAPIKit.JSONAPIIdentifiable, IdMetaType: JSONAPIKit.Meta, MetaType: JSONAPIKit.Meta, LinksType: JSONAPIKit.Links>: RelationshipType, Equatable {
 
     public let id: Identifiable.ID
 
@@ -108,16 +108,16 @@ extension ToOneRelationship where Identifiable: OptionalRelatable, MetaType == N
 /// An ResourceObject relationship that can be encoded to or decoded from
 /// a JSON API "Resource Linkage."
 ///
-/// See https://jsonapi.org/format/#document-resource-object-linkage
+/// See https://JSONAPIKit.org/format/#document-resource-object-linkage
 ///
 /// A convenient typealias might make your code much more legible: `Many<ResourceObjectDescription>`
 ///
 /// The `IdMetaType` (if not `NoIdMetadata`) will be parsed out of the Resource Identifier Object.
-/// (see https://jsonapi.org/format/#document-resource-identifier-objects)
+/// (see https://JSONAPIKit.org/format/#document-resource-identifier-objects)
 ///
 /// The `MetaType` (if not `NoMetadata`) will be parsed out of the Relationship Object.
-/// (see https://jsonapi.org/format/#document-resource-object-relationships)
-public struct ToManyRelationship<Relatable: JSONAPI.Relatable, IdMetaType: JSONAPI.Meta, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>: RelationshipType, Equatable {
+/// (see https://JSONAPIKit.org/format/#document-resource-object-relationships)
+public struct ToManyRelationship<Relatable: JSONAPIKit.Relatable, IdMetaType: JSONAPIKit.Meta, MetaType: JSONAPIKit.Meta, LinksType: JSONAPIKit.Links>: RelationshipType, Equatable {
 
     public struct ID: Equatable {
         public let id: Relatable.ID
@@ -206,16 +206,16 @@ public protocol JSONAPIIdentifiable: JSONTyped {
 
 /// The Relatable protocol describes anything that
 /// has an IdType Identifier
-public protocol Relatable: JSONAPIIdentifiable where ID: JSONAPI.IdType {
+public protocol Relatable: JSONAPIIdentifiable where ID: JSONAPIKit.IdType {
 }
 
 /// OptionalRelatable just describes an Optional
 /// with a Reltable Wrapped type.
 public protocol OptionalRelatable: JSONAPIIdentifiable where ID == Wrapped.ID? {
-    associatedtype Wrapped: JSONAPI.Relatable
+    associatedtype Wrapped: JSONAPIKit.Relatable
 }
 
-extension Optional: JSONAPIIdentifiable, OptionalRelatable, JSONTyped where Wrapped: JSONAPI.Relatable {
+extension Optional: JSONAPIIdentifiable, OptionalRelatable, JSONTyped where Wrapped: JSONAPIKit.Relatable {
     public typealias ID = Wrapped.ID?
 
     public static var jsonType: String { return Wrapped.jsonType }

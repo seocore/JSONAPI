@@ -7,8 +7,8 @@
 
 import XCTest
 import Foundation
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 
 class SparseFieldsetTests: XCTestCase {
     func test_FullEncode() {
@@ -121,10 +121,10 @@ class SparseFieldsetTests: XCTestCase {
     }
 }
 
-struct EverythingTestDescription: JSONAPI.ResourceObjectDescription {
+struct EverythingTestDescription: JSONAPIKit.ResourceObjectDescription {
     static let jsonType: String = "everything"
 
-    struct Attributes: JSONAPI.SparsableAttributes {
+    struct Attributes: JSONAPIKit.SparsableAttributes {
         let bool: Attribute<Bool>
         let int: Attribute<Int>
         let double: Attribute<Double>
@@ -163,7 +163,7 @@ struct EverythingTestDescription: JSONAPI.ResourceObjectDescription {
     typealias Relationships = NoRelationships
 }
 
-typealias EverythingTest = JSONAPI.ResourceObject<EverythingTestDescription, NoMetadata, NoLinks, String>
+typealias EverythingTest = JSONAPIKit.ResourceObject<EverythingTestDescription, NoMetadata, NoLinks, String>
 
 let testEverythingObject = EverythingTest(attributes: .init(bool: true,
                                                             int: 10,

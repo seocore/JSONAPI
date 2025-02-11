@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 import Poly
 
 final class IncludesCompareTests: XCTestCase {
@@ -204,16 +204,16 @@ final class IncludesCompareTests: XCTestCase {
     ]
 }
 
-private enum TestDescription1: JSONAPI.ResourceObjectDescription {
+private enum TestDescription1: JSONAPIKit.ResourceObjectDescription {
     static let jsonType: String = "test_type1"
 
-    struct Attributes: JSONAPI.Attributes {
+    struct Attributes: JSONAPIKit.Attributes {
         let name: Attribute<String>
         let age: Attribute<Int>
         let favoriteColor: Attribute<String?>
     }
 
-    struct Relationships: JSONAPI.Relationships {
+    struct Relationships: JSONAPIKit.Relationships {
         let bestFriend: ToOneRelationship<TestType1?, NoIdMetadata, NoMetadata, NoLinks>
         let parents: ToManyRelationship<TestType1, NoIdMetadata, NoMetadata, NoLinks>
     }
@@ -221,16 +221,16 @@ private enum TestDescription1: JSONAPI.ResourceObjectDescription {
 
 private typealias TestType1 = ResourceObject<TestDescription1, NoMetadata, NoLinks, String>
 
-private enum TestDescription2: JSONAPI.ResourceObjectDescription {
+private enum TestDescription2: JSONAPIKit.ResourceObjectDescription {
     static let jsonType: String = "test_type2"
 
-    struct Attributes: JSONAPI.Attributes {
+    struct Attributes: JSONAPIKit.Attributes {
         let name: Attribute<String>
         let age: Attribute<Int>
         let favoriteColor: Attribute<String?>
     }
 
-    struct Relationships: JSONAPI.Relationships {
+    struct Relationships: JSONAPIKit.Relationships {
         let bestFriend: ToOneRelationship<TestType2?, NoIdMetadata, NoMetadata, NoLinks>
         let parents: ToManyRelationship<TestType2, NoIdMetadata, NoMetadata, NoLinks>
     }

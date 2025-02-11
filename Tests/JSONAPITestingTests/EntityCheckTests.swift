@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 
 // Successes are fairly well-checked by the EntityTests in the JSONAPITests target.
 // We will confirm failure cases are working in this file.
@@ -61,7 +61,7 @@ extension EntityCheckTests {
 	enum EnumAttributesDescription: ResourceObjectDescription {
 		public static var jsonType: String { return "hello" }
 
-		public enum Attributes: JSONAPI.Attributes {
+		public enum Attributes: JSONAPIKit.Attributes {
 			case hello
 
 			public init(from decoder: Decoder) throws {
@@ -82,7 +82,7 @@ extension EntityCheckTests {
 
 		public typealias Attributes = NoAttributes
 
-		public enum Relationships: JSONAPI.Relationships {
+		public enum Relationships: JSONAPIKit.Relationships {
 			case hello
 
 			public init(from decoder: Decoder) throws {
@@ -99,7 +99,7 @@ extension EntityCheckTests {
 	enum BadAttributeDescription: ResourceObjectDescription {
 		public static var jsonType: String { return "hello" }
 
-		public struct Attributes: JSONAPI.Attributes {
+		public struct Attributes: JSONAPIKit.Attributes {
 			let x: Attribute<String>
 			let y: String
 		}
@@ -114,7 +114,7 @@ extension EntityCheckTests {
 
 		public typealias Attributes = NoAttributes
 
-		public struct Relationships: JSONAPI.Relationships {
+		public struct Relationships: JSONAPIKit.Relationships {
 			let x: ToOneRelationship<OkEntity, NoIdMetadata, NoMetadata, NoLinks>
 			let y: Id<String, OkEntity>
 		}
@@ -125,7 +125,7 @@ extension EntityCheckTests {
 	enum OptionalArrayAttributeDescription: ResourceObjectDescription {
 		public static var jsonType: String { return "hello" }
 
-		public struct Attributes: JSONAPI.Attributes {
+		public struct Attributes: JSONAPIKit.Attributes {
 			let x: Attribute<[String]>
 			let y: Attribute<[String]?>
 		}

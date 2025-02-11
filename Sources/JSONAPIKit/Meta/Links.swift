@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 11/24/18.
 //
 
-/// A Links structure should contain nothing but `JSONAPI.Link` properties.
+/// A Links structure should contain nothing but `JSONAPIKit.Link` properties.
 public protocol Links: Codable, Equatable {}
 
 /// Use NoLinks where no links should belong to a JSON API component
@@ -18,7 +18,7 @@ public struct NoLinks: Links, CustomStringConvertible {
 
 public protocol JSONAPIURL: Codable, Equatable {}
 
-public struct Link<URL: JSONAPI.JSONAPIURL, Meta: JSONAPI.Meta>: Equatable, Codable {
+public struct Link<URL: JSONAPIKit.JSONAPIURL, Meta: JSONAPIKit.Meta>: Equatable, Codable {
     public let url: URL
     public let meta: Meta
     

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JSONAPI
+import JSONAPIKit
 import Poly
 
 public class PolyProxyTests: XCTestCase {
@@ -74,7 +74,7 @@ public extension PolyProxyTests {
 	enum UserDescription1: ResourceObjectDescription {
 		public static var jsonType: String { return "users" }
 
-		public struct Attributes: JSONAPI.Attributes {
+		public struct Attributes: JSONAPIKit.Attributes {
 			let firstName: Attribute<String>
 			let lastName: Attribute<String>
 		}
@@ -85,7 +85,7 @@ public extension PolyProxyTests {
 	enum UserDescription2: ResourceObjectDescription {
 		public static var jsonType: String { return "users" }
 
-		public struct Attributes: JSONAPI.Attributes {
+		public struct Attributes: JSONAPIKit.Attributes {
 			let name: Attribute<[String]>
 		}
 

@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 10/12/19.
 //
 
-public extension JSONAPI.ResourceObject {
+public extension JSONAPIKit.ResourceObject {
     /// Return a new `ResourceObject`, having replaced `self`'s
     /// `attributes` with the attributes returned by the given
     /// replacement function.

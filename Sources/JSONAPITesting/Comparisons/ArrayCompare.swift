@@ -5,7 +5,7 @@
 //  Created by Mathew Polzin on 11/5/19.
 //
 
-import JSONAPI
+import JSONAPIKit
 
 public enum ArrayElementComparison: Equatable, CustomStringConvertible {
     case same

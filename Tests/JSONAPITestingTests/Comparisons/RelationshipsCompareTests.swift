@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 
 final class RelationshipsCompareTests: XCTestCase {
     func test_same() {
@@ -196,7 +196,7 @@ extension RelationshipsCompareTests {
 
     typealias TestType = ResourceObject<TestTypeDescription, NoMetadata, NoLinks, String>
 
-    struct TestMeta: JSONAPI.Meta, CustomDebugStringConvertible {
+    struct TestMeta: JSONAPIKit.Meta, CustomDebugStringConvertible {
         let hello: String
 
         var debugDescription: String {
@@ -204,7 +204,7 @@ extension RelationshipsCompareTests {
         }
     }
 
-    struct TestLinks: JSONAPI.Links, CustomDebugStringConvertible {
+    struct TestLinks: JSONAPIKit.Links, CustomDebugStringConvertible {
         let link: Link<String, NoMetadata>
 
         var debugDescription: String {
@@ -212,7 +212,7 @@ extension RelationshipsCompareTests {
         }
     }
 
-    struct TestRelationships: JSONAPI.Relationships {
+    struct TestRelationships: JSONAPIKit.Relationships {
         let a: ToOneRelationship<TestType, NoIdMetadata, NoMetadata, NoLinks>?
         let b: ToOneRelationship<TestType, NoIdMetadata, TestMeta, TestLinks>?
         let c: ToManyRelationship<TestType, NoIdMetadata, NoMetadata, NoLinks>?
@@ -222,10 +222,10 @@ extension RelationshipsCompareTests {
         let g: MetaRelationship<TestMeta, TestLinks>?
     }
 
-    struct TestNonRelationships: JSONAPI.Relationships {
+    struct TestNonRelationships: JSONAPIKit.Relationships {
         let a: TestType
         let b: Bool
         let c: Int
-        let d: JSONAPI.Id<String, TestType>
+        let d: JSONAPIKit.Id<String, TestType>
     }
 }

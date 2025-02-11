@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JSONAPI
+import JSONAPIKit
 import Poly
 
 class DocumentTests: XCTestCase {
@@ -24,7 +24,7 @@ class DocumentTests: XCTestCase {
         }
 
         // Document
-        test(JSONAPI.Document<
+        test(JSONAPIKit.Document<
             NoResourceBody,
             NoMetadata,
             NoLinks,
@@ -39,7 +39,7 @@ class DocumentTests: XCTestCase {
                 links: .none
         ))
 
-        test(JSONAPI.Document<
+        test(JSONAPIKit.Document<
             NoResourceBody,
             NoMetadata,
             NoLinks,
@@ -50,7 +50,7 @@ class DocumentTests: XCTestCase {
                 body: .none
         ))
 
-        test(JSONAPI.Document<
+        test(JSONAPIKit.Document<
             NoResourceBody,
             NoMetadata,
             NoLinks,
@@ -62,7 +62,7 @@ class DocumentTests: XCTestCase {
         ))
 
         // Document.SuccessDocument
-        test(JSONAPI.Document<
+        test(JSONAPIKit.Document<
             NoResourceBody,
             NoMetadata,
             NoLinks,
@@ -77,7 +77,7 @@ class DocumentTests: XCTestCase {
                 links: .none
         ))
 
-        test(JSONAPI.Document<
+        test(JSONAPIKit.Document<
             NoResourceBody,
             NoMetadata,
             NoLinks,
@@ -89,7 +89,7 @@ class DocumentTests: XCTestCase {
         ))
 
         // Document.ErrorDocument
-        test(JSONAPI.Document<
+        test(JSONAPIKit.Document<
             NoResourceBody,
             NoMetadata,
             NoLinks,
@@ -101,7 +101,7 @@ class DocumentTests: XCTestCase {
                 errors: []
         ))
 
-        test(JSONAPI.Document<
+        test(JSONAPIKit.Document<
             NoResourceBody,
             NoMetadata,
             NoLinks,
@@ -1593,7 +1593,7 @@ extension DocumentTests {
 		
 		typealias Attributes = NoAttributes
 		
-		struct Relationships: JSONAPI.Relationships {
+		struct Relationships: JSONAPIKit.Relationships {
 			let author: ToOneRelationship<Author, NoIdMetadata, NoMetadata, NoLinks>
 		}
 	}
@@ -1603,7 +1603,7 @@ extension DocumentTests {
     enum BookType: ResourceObjectDescription {
         static var jsonType: String { return "books" }
 
-        struct Attributes: JSONAPI.SparsableAttributes {
+        struct Attributes: JSONAPIKit.SparsableAttributes {
             let pageCount: Attribute<Int>
 
             enum CodingKeys: String, SparsableCodingKey {
@@ -1611,7 +1611,7 @@ extension DocumentTests {
             }
         }
 
-        struct Relationships: JSONAPI.Relationships {
+        struct Relationships: JSONAPIKit.Relationships {
             let author: ToOneRelationship<Author, NoIdMetadata, NoMetadata, NoLinks>
             let series: ToManyRelationship<Book, NoIdMetadata, NoMetadata, NoLinks>
             let collection: MetaRelationship<NoMetadata, TestLinks>?
@@ -1620,17 +1620,17 @@ extension DocumentTests {
 
     typealias Book = BasicEntity<BookType>
 
-	struct TestPageMetadata: JSONAPI.Meta {
+	struct TestPageMetadata: JSONAPIKit.Meta {
 		let total: Int
 		let limit: Int
 		let offset: Int
 	}
 
-	struct TestLinks: JSONAPI.Links {
+	struct TestLinks: JSONAPIKit.Links {
 		let link: Link<String, NoMetadata>
 		let link2: Link<String,TestMetadata>
 
-		struct TestMetadata: JSONAPI.Meta {
+		struct TestMetadata: JSONAPIKit.Meta {
 			let hello: String
 		}
 	}

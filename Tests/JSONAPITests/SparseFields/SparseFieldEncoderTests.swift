@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import JSONAPI
+@testable import JSONAPIKit
 import Foundation
 
 class SparseFieldEncoderTests: XCTestCase {

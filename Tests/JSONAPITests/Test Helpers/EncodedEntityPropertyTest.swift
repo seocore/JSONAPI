@@ -7,8 +7,8 @@
 
 import Foundation
 import XCTest
-import JSONAPI
-import JSONAPITesting
+import JSONAPIKit
+import JSONAPIKitTesting
 
 func testEncoded<E: ResourceObjectType>(entity: E) {
 	let encodedEntityData = encoded(value: entity)
